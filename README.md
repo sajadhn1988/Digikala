@@ -103,11 +103,14 @@ To run this project locally, you don't need any complex build tools.
     - Install "Live Server" extension.
     - Right-click `index.html` and select "Open with Live Server".
 
-    *Using Python:*
+    *Install Live Server Extension (if not already installed)*
     ```bash
-    python -m http.server 8000
+    View Your Site
+    Your default browser will open automatically
     ```
-    Then visit `http://localhost:8000`
+    Then visit `The site will be available at: http://127.0.0.1:5500/`
+
+
 
 ## 📂 Project Structure
 
