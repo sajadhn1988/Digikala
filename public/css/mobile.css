@@ -1,0 +1,466 @@
+/* =========================================
+   Mobile Bottom Navigation
+   ========================================= */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top: 1px solid #eee;
+  z-index: 10002;
+  padding: 8px 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+  justify-content: space-around;
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #424750;
+  font-size: 0.7rem;
+  cursor: pointer;
+  flex: 1;
+  height: 100%;
+  transition: color 0.2s ease;
+}
+
+.bottom-nav-item i {
+  font-size: 1.2rem;
+  margin-bottom: 2px;
+  transition: color 0.2s ease;
+}
+
+.bottom-nav-item.active {
+  color: #ef394e;
+  font-weight: 700;
+}
+
+.bottom-nav-item.active i {
+  color: #ef394e;
+}
+
+.bottom-nav-item:hover {
+  color: #ef394e;
+}
+
+.bottom-nav-item:hover i {
+  color: #ef394e;
+}
+
+/* =========================================
+   Enhanced Mobile Category Menu
+   ========================================= */
+.mobile-category-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 60px;
+  background: #fff;
+  z-index: 10001;
+  display: none;
+  flex-direction: column;
+  overflow-y: auto;
+
+  /* RTL Animation: Start from left (outside screen) */
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+}
+
+/* وقتی active شد → وارد صفحه بشه */
+.mobile-category-menu.active {
+  display: flex;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Make sure overlay doesn't interfere */
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  backdrop-filter: blur(4px);
+}
+
+.nav-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Header Section */
+.mobile-category-header {
+  padding: 15px 20px;
+  border-bottom: 1px solid #f0f0f1;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  flex-shrink: 0;
+  gap: 15px;
+}
+
+.mobile-category-header .back-button {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: #424750;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.mobile-category-header .back-button:hover {
+  color: #ef394e;
+}
+
+.category-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #424750;
+  flex: 1;
+  text-align: center;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #424750;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Category Content Area */
+.mobile-category-content {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  padding-bottom: 0;
+}
+
+/* Category Levels */
+.category-level {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  /* Start from right side for RTL navigation */
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.category-level.active {
+  transform: translateX(0);
+}
+
+.category-level.slide-out {
+  /* When going back, slide to right */
+  transform: translateX(100%);
+}
+
+/* Search Box */
+.search-box-mobile {
+  background: #f0f0f1;
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  margin: 15px 20px;
+  color: #a1a3a8;
+}
+
+.search-box-mobile .search-icon {
+  color: #a1a3a8;
+  margin-left: 10px;
+}
+
+.search-box-mobile input {
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: #424750;
+  margin-right: 10px;
+}
+
+/* Category Lists */
+.category-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.category-list-item {
+  border-bottom: 1px solid #f5f5f5;
+  display: flex;
+  align-items: center;
+}
+
+.category-list-item a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  text-decoration: none;
+  color: #424750;
+  font-size: 0.9rem;
+  transition: background 0.3s;
+  flex: 1;
+}
+
+.category-list-item a:hover {
+  background: #f9f9f9;
+}
+
+.category-list-item.highlight a {
+  color: #ef394e;
+  font-weight: bold;
+}
+
+.category-list-item i {
+  color: #a1a3a8;
+  font-size: 0.8rem;
+}
+
+.category-list-item .category-icon {
+  margin-left: 12px;
+  font-size: 1.2rem;
+  width: 24px;
+  text-align: center;
+}
+
+.category-list-item .category-arrow {
+  color: #a1a3a8;
+  font-size: 0.8rem;
+}
+
+/* Active state for bottom nav */
+.bottom-nav-item.active {
+  color: #ef394e;
+  font-weight: 700;
+}
+
+/* RTL Animation for level transitions */
+@keyframes slideInFromRightRTL {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutToRightRTL {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideInFromLeftRTL {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutToLeftRTL {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #424750;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1001;
+}
+
+.mobile-close-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #424750;
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 100001;
+  padding: 8px;
+}
+
+/* Tablet and Mobile Responsive Styles */
+@media (max-width: 992px) {
+  body {
+    padding-bottom: 60px;
+  }
+
+  .mobile-bottom-nav {
+    display: flex;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .mobile-close-btn {
+    display: block;
+  }
+}
+
+@media (min-width: 992px) {
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+
+  .mobile-menu-btn {
+    display: none !important;
+  }
+
+  .mobile-category-menu {
+    display: none !important;
+    transform: translateX(-100%) !important;
+  }
+
+  .mobile-category-menu.active {
+    display: none !important;
+  }
+
+  body {
+    padding-bottom: 0 !important;
+  }
+}
+
+/* Mobile Navigation Menu */
+@media (max-width: 991px) {
+  .nav-right {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100vh;
+    background: white;
+    z-index: 10000;
+    transition: right 0.3s ease;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    padding: 60px 20px 20px;
+    overflow-y: auto;
+  }
+
+  .nav-right.active {
+    right: 0;
+  }
+
+  .nav-menu {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-menu li {
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f1;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .nav-category .mega-menu {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    display: none;
+    margin-top: 10px;
+  }
+
+  .nav-category.active .mega-menu {
+    display: block;
+  }
+
+  .mega-menu-columns {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+/* Mobile styles for header */
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .header-top {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .user-actions span {
+    display: none;
+  }
+
+  .user-actions {
+    padding: 8px;
+  }
+
+  .cart-icon {
+    margin-right: 5px;
+    padding: 6px 8px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 320px) {
+  .nav-right {
+    width: 250px;
+  }
+}

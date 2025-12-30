@@ -1,0 +1,253 @@
+/* Authentication Pages Styles */
+body {
+    font-family: "Vazirmatn", sans-serif;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #424750;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border: 1px solid #e0e0e2;
+    border-radius: 8px;
+    text-align: center;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.auth-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.back-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    color: #424750;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.back-icon:hover {
+    background-color: #f0f0f1;
+    color: #ef394e;
+}
+
+.logo {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    color: #ef394e;
+    font-weight: 900;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.logo img {
+    height: 70px;
+}
+
+.auth-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.auth-subtitle {
+    font-size: 0.8rem;
+    color: #81858b;
+    margin-bottom: 20px;
+    text-align: right;
+    line-height: 1.5;
+}
+
+.input-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cce1ea;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    outline: none;
+    text-align: right;
+    box-sizing: border-box;
+    direction: rtl;
+    /* Default state */
+}
+
+/* Change to LTR when focused or has value */
+.input-group input:focus,
+.input-group input:not(:placeholder-shown) {
+    direction: ltr;
+    text-align: left;
+}
+
+.input-group input:focus {
+    border-color: #ef394e;
+}
+
+.input-label {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    color: #a1a3a8;
+    pointer-events: none;
+    transition: all 0.2s;
+    background: #fff;
+    padding: 0 4px;
+}
+
+/* Float label when focused or has value - Default behavior for non-password */
+.input-group input:not([type="password"]):focus~.input-label,
+.input-group input:not([type="password"]):not(:placeholder-shown)~.input-label {
+    top: 0;
+    font-size: 0.75rem;
+    color: #ef394e;
+}
+
+/* Password specific: Hide label when focused or has value */
+.input-group input[type="password"]:focus~.input-label,
+.input-group input[type="password"]:not(:placeholder-shown)~.input-label {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Floating label fix for placeholder-shown trick */
+.input-group input::placeholder {
+    opacity: 0;
+}
+
+.submit-btn {
+    width: 100%;
+    background-color: #ef394e;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    margin-bottom: 15px;
+}
+
+.submit-btn:hover {
+    background-color: #d32f2f;
+}
+
+.terms {
+    font-size: 0.7rem;
+    color: #81858b;
+    line-height: 1.8;
+    margin-top: 20px;
+}
+
+.terms a {
+    color: #19bfd3;
+    text-decoration: none;
+}
+
+.error-message {
+    color: #ef394e;
+    font-size: 0.8rem;
+    margin-bottom: 15px;
+    text-align: right;
+    display: none;
+}
+
+/* Password Visibility Toggle */
+.input-icon {
+    position: absolute;
+    right: 12px;
+    /* Move to right */
+    left: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a1a3a8;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    opacity: 0;
+    /* Hidden by default */
+    pointer-events: none;
+}
+
+/* Show icon when password input has value or is focused */
+.input-group input[type="password"]:not(:placeholder-shown)~.input-icon,
+.input-group input[type="password"]:focus~.input-icon {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.input-icon:hover {
+    color: #424750;
+    background-color: #f0f0f1;
+}
+
+/* Styles for password input with icon */
+.input-group input[type="password"],
+#password {
+    padding-left: 12px;
+    /* Reset left padding */
+    padding-right: 40px;
+    /* Space for icon on right */
+}
+
+/* Links */
+.auth-link {
+    font-size: 0.75rem;
+    color: #19bfd3;
+    text-decoration: none;
+}
+
+.forgot-link-container {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.auth-links-footer {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.auth-separator {
+    color: #e0e0e2;
+    font-size: 0.8rem;
+}

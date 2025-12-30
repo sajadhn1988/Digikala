@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود | ثبت‌نام</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="public/css/auth.css" />
+</head>
+
+<body>
+    <div class="auth-container">
+        <a href="index.html" class="back-icon"><i class="fas fa-arrow-right"></i></a>
+
+        <a href="index.html" class="logo">
+            <img src="public/icons/logo-3D.png" alt="Gigikala Logo">
+        </a>
+
+        <div class="auth-title">ورود | ثبت‌نام</div>
+        <div class="auth-subtitle">سلام!<br>لطفا شماره موبایل یا ایمیل خود را وارد کنید</div>
+
+        <form id="loginForm" onsubmit="handleLoginStep1(event)">
+            <div class="input-group">
+                <input type="text" id="username" required placeholder=" ">
+                <label for="username" class="input-label">شماره موبایل یا ایمیل</label>
+            </div>
+
+            <div id="passwordSection" style="display: none;">
+                <div class="input-group">
+                    <input type="password" id="password" placeholder=" ">
+                    <i class="fas fa-eye input-icon" id="togglePasswordBtn"></i>
+                    <label for="password" class="input-label">رمز عبور</label>
+                </div>
+                <div class="forgot-link-container">
+                    <a href="forgot-password.html" class="auth-link">فراموشی رمز عبور</a>
+                </div>
+            </div>
+
+            <div class="error-message" id="errorMessage"></div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">ورود</button>
+
+            <div class="auth-links-footer">
+                <a href="forgot-password.html" class="auth-link">فراموشی رمز عبور</a>
+                <span class="auth-separator">|</span>
+                <a href="change-password.html" class="auth-link">تغییر رمز عبور</a>
+            </div>
+        </form>
+
+        <div class="terms">
+            ورود شما به معنای پذیرش <a href="#">شرایط جی‌جی‌کالا</a> و <a href="#">قوانین حریم‌خصوصی</a> است
+        </div>
+    </div>
+
+    <!-- Load Data and Auth Logic -->
+    <script src="public/js/user-data.js"></script>
+    <script src="public/js/auth.js"></script>
+    <script>
+        let isPasswordStep = false;
+
+        // Password Toggle Logic
+        document.getElementById('togglePasswordBtn').addEventListener('click', function () {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        function handleLoginStep1(e) {
+            e.preventDefault();
+            const usernameInput = document.getElementById('username');
+            const passwordSection = document.getElementById('passwordSection');
+            const submitBtn = document.getElementById('submitBtn');
+            const errorDiv = document.getElementById('errorMessage');
+
+            if (!isPasswordStep) {
+                // Determine if user exists (mock check or simple validation)
+                if (usernameInput.value.length > 3) {
+                    // Move to password step
+                    isPasswordStep = true;
+                    passwordSection.style.display = 'block';
+                    usernameInput.disabled = true; // Lock username
+                    submitBtn.textContent = 'تایید';
+                    // Focus password
+                    setTimeout(() => document.getElementById('password').focus(), 100);
+                    errorDiv.style.display = 'none';
+                } else {
+                    errorDiv.textContent = "لطفا نام کاربری یا ایمیل معتبر وارد کنید";
+                    errorDiv.style.display = 'block';
+                }
+            } else {
+                // Attempt Login
+                const passwordInput = document.getElementById('password');
+                const result = Auth.login(usernameInput.value, passwordInput.value);
+
+                if (result.success) {
+                    window.location.href = 'index.html';
+                } else {
+                    errorDiv.textContent = result.message;
+                    errorDiv.style.display = 'block';
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

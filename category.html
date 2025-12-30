@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>دسته‌بندی - جی جی‌کالا</title>
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="public/css/header.css" />
+  <link rel="stylesheet" href="public/css/footer.css" />
+  <link rel="stylesheet" href="public/css/mobile.css" />
+  <link rel="stylesheet" href="public/css/cate-styles.css" />
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-top">
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <div class="header-right">
+        <a href="index.html" class="logo">
+          <img src="public/icons/logo-3D.png" class="logo-image" />
+          <span style="font-family: sans-serif; letter-spacing: -1px">GigiKala</span>
+        </a>
+      </div>
+
+      <div class="search-box">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" placeholder="جستجو" id="searchInput" />
+        <div class="search-results" id="searchResults"></div>
+      </div>
+
+      <div class="header-left">
+        <div class="user-actions">
+          <i class="fas fa-sign-in-alt"></i>
+          <span>ورود | ثبت‌نام</span>
+        </div>
+        <div class="cart-icon">
+          <a href="checkout.html">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-badge">۰</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation with Back Button and Category Breadcrumb -->
+  <nav>
+    <div class="nav-content">
+      <div class="nav-right">
+        <button class="mobile-close-btn">
+          <i class="fas fa-times"></i>
+        </button>
+        <ul class="nav-menu">
+          <li class="nav-category">
+            <i class="fas fa-bars"></i>
+            دسته‌بندی کالاها
+            <!-- Mega Menu -->
+            <div class="mega-menu">
+              <div class="mega-menu-right">
+                <ul id="megaMenuCategories">
+                  <!-- Categories will be populated by JavaScript from data.js -->
+                </ul>
+              </div>
+              <div class="mega-menu-content">
+                <div class="mega-menu-header" id="megaMenuHeader">
+                  <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="mega-menu-columns" id="megaMenuColumns">
+                  <!-- Columns will be populated by JavaScript from data.js -->
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <i class="fas fa-percent"></i>
+            شگفت‌انگیزها
+          </li>
+          <li>
+            <i class="fas fa-shopping-basket"></i>
+            سوپرمارکت
+          </li>
+          <li>
+            <i class="fas fa-fire"></i>
+            پرفروش‌ترین‌ها
+          </li>
+          <li>
+            <i class="fas fa-tag"></i>
+            تخفیف‌ها و پیشنهادها
+          </li>
+          <li>سوالی دارید؟</li>
+          <li>در جی جی‌کالا بفروشید!</li>
+        </ul>
+      </div>
+      <div class="nav-left">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>ارسال به کرمانشاه، کرمانشاه</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Category Breadcrumb Section -->
+  <div class="breadcrumb-section">
+    <div class="breadcrumb-content">
+      <div class="category-breadcrumb" id="categoryBreadcrumb">
+        <a href="index.html">
+          <i class="fas fa-home"></i>
+          خانه
+        </a>
+        <i class="fas fa-chevron-left"></i>
+        <span id="currentCategoryName">دسته‌بندی</span>
+      </div>
+
+      <div class="filter-controls">
+        <select id="sortSelect">
+          <option value="default">مرتب‌سازی: پیش‌فرض</option>
+          <option value="price-asc">قیمت: کم به زیاد</option>
+          <option value="price-desc">قیمت: زیاد به کم</option>
+          <option value="rating">بیشترین امتیاز</option>
+          <option value="popular">محبوب‌ترین</option>
+        </select>
+
+        <div class="view-toggle">
+          <button class="view-btn active" data-view="grid">
+            <i class="fas fa-th-large"></i>
+          </button>
+          <button class="view-btn" data-view="list">
+            <i class="fas fa-list"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="category-container">
+    <!-- Sidebar Filters -->
+    <aside class="category-sidebar">
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">فیلترها</h3>
+        <button class="clear-filters" id="clearFilters">
+          پاک کردن فیلترها
+        </button>
+      </div>
+
+      <!-- Category Tree -->
+      <div class="sidebar-section">
+        <div class="filter-title-with-toggle">
+          <h4 class="filter-title">دسته‌بندی‌ها</h4>
+          <button class="category-toggle-btn" id="categoryToggleBtn">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+        <div class="category-tree" id="categoryTree">
+          <!-- Will be populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- General Filters -->
+      <div class="sidebar-section">
+        <h4 class="filter-title">قیمت (تومان)</h4>
+        <div class="price-filter">
+          <div class="price-inputs">
+            <input type="number" id="minPrice" placeholder="حداقل" min="0" />
+            <span>تا</span>
+            <input type="number" id="maxPrice" placeholder="حداکثر" min="0" />
+          </div>
+          <button class="apply-price" id="applyPrice">اعمال</button>
+        </div>
+      </div>
+
+      <!-- Specific Filters Container (Dynamic) -->
+      <div id="specificFilters">
+        <!-- Category-specific filters will be rendered here -->
+      </div>
+
+
+      <!-- در بخش فیلترهای سایدبار، قسمت امتیاز را به این شکل کامل کنید: -->
+      <div class="sidebar-section filter-dropdown" id="ratingFilter">
+        <button class="filter-dropdown-toggle">
+          <span>امتیاز</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="filter-dropdown-content">
+          <div class="rating-filter">
+            <label class="rating-option">
+              <input type="radio" name="rating" value="5" />
+              <div class="stars">
+                <span>۵ ستاره</span>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                  class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+            </label>
+            <label class="rating-option">
+              <input type="radio" name="rating" value="4" />
+              <div class="stars">
+                <span>۴ ستاره و بالاتر</span>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                  class="fas fa-star"></i><i class="far fa-star"></i>
+              </div>
+            </label>
+            <label class="rating-option">
+              <input type="radio" name="rating" value="3" />
+              <div class="stars">
+                <span>۳ ستاره و بالاتر</span>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                  class="far fa-star"></i><i class="far fa-star"></i>
+              </div>
+            </label>
+            <label class="rating-option">
+              <input type="radio" name="rating" value="2" />
+              <div class="stars">
+                <span>۲ ستاره و بالاتر</span>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i
+                  class="far fa-star"></i><i class="far fa-star"></i>
+              </div>
+            </label>
+            <label class="rating-option">
+              <input type="radio" name="rating" value="1" />
+              <div class="stars">
+                <span>۱ ستاره و بالاتر</span>
+                <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i
+                  class="far fa-star"></i><i class="far fa-star"></i>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h4 class="filter-title">تخفیف‌دارها</h4>
+        <label class="discount-filter">
+          <input type="checkbox" id="discountedOnly" />
+          <span>فقط کالاهای تخفیف‌دار</span>
+        </label>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="category-main">
+      <div class="category-header">
+        <h1 id="pageTitle">محصولات دسته‌بندی</h1>
+        <div class="product-count" id="productCount">
+          <span id="countNumber">0</span> محصول یافت شد
+        </div>
+      </div>
+
+      <div class="active-filters" id="activeFilters">
+        <!-- Active filters will appear here -->
+      </div>
+
+      <div class="products-container grid-view" id="productsContainer">
+        <!-- Products will be loaded here -->
+      </div>
+
+      <div class="no-products" id="noProducts" style="display: none">
+        <i class="fas fa-search"></i>
+        <h3>محصولی یافت نشد</h3>
+        <p>با تغییر فیلترها دوباره امتحان کنید</p>
+        <button class="clear-search" id="clearSearch">پاک کردن جستجو</button>
+      </div>
+
+      <div class="pagination" id="pagination">
+        <!-- Pagination will be added here -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-top">
+        <div class="footer-logo-section">
+          <div class="logo">
+            <img src="public/icons/logo-3D.png" class="logo-image" />
+            <span>GigiKala</span>
+          </div>
+          <div class="footer-contact">
+            تلفن پشتیبانی ۰۰۰۰۰۰۰ - ۰۲۱
+            <span class="separator">|</span>
+            ۷ روز هفته، ۲۴ ساعته پاسخگوی شما هستیم
+          </div>
+        </div>
+        <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+          بازگشت به بالا
+          <i class="fas fa-chevron-up"></i>
+        </button>
+      </div>
+
+      <div class="footer-features">
+        <div class="feature-item">
+          <i class="fas fa-shipping-fast"></i>
+          <span>امکان تحویل اکسپرس</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-credit-card"></i>
+          <span>امکان پرداخت در محل</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-headset"></i>
+          <span>۷ روز هفته، ۲۴ ساعته</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-undo"></i>
+          <span>هفت روز ضمانت بازگشت کالا</span>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-check-circle"></i>
+          <span>ضمانت اصل بودن کالا</span>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>با جی جی‌کالا</h4>
+          <ul>
+            <li><a href="#">اتاق خبر جی جی‌کالا</a></li>
+            <li><a href="#">فروش در جی جی‌کالا</a></li>
+            <li><a href="#">فرصت‌های شغلی</a></li>
+            <li><a href="#">گزارش تخلف در جی جی‌کالا</a></li>
+            <li><a href="#">تماس با جی جی‌کالا</a></li>
+            <li><a href="#">درباره جی جی‌کالا</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>خدمات مشتریان</h4>
+          <ul>
+            <li><a href="#">پاسخ به پرسش‌های متداول</a></li>
+            <li><a href="#">رویه‌های بازگرداندن کالا</a></li>
+            <li><a href="#">شرایط استفاده</a></li>
+            <li><a href="#">حریم خصوصی</a></li>
+            <li><a href="#">گزارش باگ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>راهنمای خرید از جی جی‌کالا</h4>
+          <ul>
+            <li><a href="#">نحوه ثبت سفارش</a></li>
+            <li><a href="#">رویه ارسال سفارش</a></li>
+            <li><a href="#">شیوه‌های پرداخت</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>همراه ما باشید!</h4>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-aparat"></i></a>
+          </div>
+          <div class="newsletter-text">
+            با ثبت ایمیل، از جدید‌ترین تخفیف‌ها با‌خبر شوید
+          </div>
+          <form class="newsletter-form">
+            <input type="email" placeholder="ایمیل شما" />
+            <button type="submit">ثبت</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="copyright">
+        برای استفاده از مطالب جی جی‌کالا، داشتن «هدف غیرتجاری» و ذکر «منبع»
+        کافیست. تمام حقوق اين وب‌سايت نیز برای شرکت آنلاین جی جی‌کالا است.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Navigation -->
+  <div class="mobile-bottom-nav">
+    <div class="bottom-nav-item">
+      <i class="fas fa-store"></i>
+      <span>فروشگاه</span>
+    </div>
+    <div class="bottom-nav-item" id="mobileCategoryBtn">
+      <i class="fas fa-shapes"></i>
+      <span>دسته‌بندی‌ها</span>
+    </div>
+    <div class="bottom-nav-item">
+      <i class="fas fa-shopping-basket"></i>
+      <span>سبد خرید</span>
+    </div>
+    <div class="bottom-nav-item">
+      <i class="fas fa-user"></i>
+      <span>حساب کاربری</span>
+    </div>
+  </div>
+
+  <!-- Mobile Category Menu Overlay -->
+  <div class="mobile-category-menu" id="mobileCategoryMenu">
+    <div class="mobile-category-header">
+      <button class="back-button" id="categoryBackButton" style="display: none">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+      <div class="category-title" id="categoryTitle">دسته‌بندی کالاها</div>
+      <button class="close-button" id="closeCategoryMenu">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="mobile-category-content">
+      <!-- Level 1: Main Categories -->
+      <div class="category-level active" id="level-categories">
+        <div class="search-box-mobile">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" placeholder="جستجو در دسته‌بندی‌ها" id="mobileCategorySearch" />
+        </div>
+        <ul class="category-list" id="mainCategoriesList">
+          <!-- Main categories will be populated by JavaScript -->
+        </ul>
+      </div>
+
+      <!-- Level 2: Subcategories -->
+      <div class="category-level" id="level-subcategories">
+        <ul class="category-list" id="subcategoriesList">
+          <!-- Subcategories will be populated by JavaScript -->
+        </ul>
+      </div>
+
+      <!-- Level 3: Microcategories -->
+      <div class="category-level" id="level-microcategories">
+        <ul class="category-list" id="microcategoriesList">
+          <!-- Microcategories will be populated by JavaScript -->
+        </ul>
+      </div>
+
+      <!-- Level 4: Nanocategories -->
+      <div class="category-level" id="level-nanocategories">
+        <ul class="category-list" id="nanocategoriesList">
+          <!-- Nanocategories will be populated by JavaScript -->
+        </ul>
+      </div>
+
+      <!-- Level 5: Picocategories -->
+      <div class="category-level" id="level-picocategories">
+        <ul class="category-list" id="picocategoriesList">
+          <!-- Picocategories will be populated by JavaScript -->
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay for backdrop -->
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <script src="public/js/user-data.js"></script>
+  <script src="public/js/auth.js"></script>
+  <script src="public/js/categories/cat-1-mobile.js"></script>
+  <script src="public/js/categories/cat-2-laptop.js"></script>
+  <script src="public/js/categories/cat-3-digital.js"></script>
+  <script src="public/js/categories/cat-4-home.js"></script>
+  <script src="public/js/categories/cat-5-fashion.js"></script>
+  <script src="public/js/categories/cat-6-supermarket.js"></script>
+  <script src="public/js/categories/cat-7-toys.js"></script>
+  <script src="public/js/categories/cat-8-beauty.js"></script>
+  <script src="public/js/categories/cat-9-tools.js"></script>
+  <script src="public/js/categories/cat-10-car.js"></script>
+  <script src="public/js/categories/cat-11-books.js"></script>
+  <script src="public/js/categories/cat-12-sport.js"></script>
+  <script src="public/js/categories/cat-13-av.js"></script>
+  <script src="public/js/brand-data.js"></script>
+  <script src="public/js/product-data.js"></script>
+  <script src="public/js/nav.js"></script>
+  <script src="public/js/cart.js"></script>
+  <script src="public/js/mobile.js"></script>
+  <script src="public/js/category.js"></script>
+</body>
+
+</html>
