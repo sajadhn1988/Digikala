@@ -1,6 +1,6 @@
 
 # 🛍️ GigiKala - Advanced Digikala Clone
-
+دیجیکالا کلون
 ![Project Banner](public/icons/logo-3D.png)
 
 > An immersive, pixel-perfect clone of Iran's leading e-commerce platform, **Digikala**, built with **Vanilla JavaScript**, **CSS3**, and **HTML5**.
