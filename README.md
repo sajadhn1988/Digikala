@@ -149,4 +149,6 @@ Contributions are what make the open source community such an amazing place to l
 
 <div align="center">
   Made with ❤️ and plenty of ☕ by Sajjad Hemati Nourani
+  حمایت مالی:
+  https://donito.me/sajad-hemati-nourani
 </div>
