@@ -64,6 +64,20 @@ This project demonstrates advanced DOM manipulation, state management without fr
   <h3>📂 Mega Menu</h3>
   <!-- Replace with: screenshots/megamenu.png -->
   <img src="screenshots/megamenu.png" alt="Mega Menu" width="800" style="border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+
+   <h3>👤 User Profile & Dashboard</h3>
+  <!-- User Menu Dropdown -->
+  <div style="text-align: center;">
+    <h4>🔽 User Menu</h4>
+    <img src="screenshots/user.png" alt="User Menu" width="300" style="border-radius: 15px; border: 4px solid #333;">
+    <img src="screenshots/profile.png" alt="User Menu" width="300" style="border-radius: 15px; border: 4px solid #333;">
+    <p>Quick access to account settings, orders, and logout</p>
+  </div>
+
+  <h3>📦 Order Management</h3>
+  <img src="screenshots/cart.png" alt="User Menu" width="300" style="border-radius: 15px; border: 4px solid #333;">
+  
+  
 </div>
 
 > **Note**: To see the latest visuals, please clone the repo and view it locally!
@@ -131,5 +145,5 @@ Contributions are what make the open source community such an amazing place to l
 ---
 
 <div align="center">
-  Made with ❤️ and plenty of ☕
+  Made with ❤️ and plenty of ☕ by Sajjad Hemati Nourani
 </div>
